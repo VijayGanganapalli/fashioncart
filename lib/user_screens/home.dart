@@ -9,6 +9,7 @@ import 'profile_settings.dart';
 import 'delivery_address.dart';
 import 'about_us.dart';
 import 'login_logout.dart';
+import 'package:fashioncart/tools/store.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -68,9 +69,105 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: Center(
-        child: Text(
-          "Home Page",
-          style: TextStyle(fontSize: 25.0),
+        child: Column(
+          children: <Widget>[
+            Flexible(
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                ),
+                itemCount: storeItems.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    child: Stack(
+                      alignment: FractionalOffset.topLeft,
+                      children: <Widget>[
+                        Stack(
+                          alignment: FractionalOffset.bottomCenter,
+                          children: <Widget>[
+                            Container(
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image:
+                                      NetworkImage(storeItems[index].itemImage),
+                                  fit: BoxFit.fitWidth,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              color: Colors.black.withAlpha(100),
+                              height: 35.0,
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
+                                      storeItems[index]
+                                          .itemName
+                                          .substring(0, 8),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 16.0,
+                                          color: Colors.white),
+                                    ),
+                                    Text(
+                                      "Rs. ${storeItems[index].itemPrice}",
+                                      style: TextStyle(
+                                        color: Colors.red[500],
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Container(
+                              height: 30.0,
+                              width: 50.0,
+                              decoration: BoxDecoration(
+                                  color: Colors.black.withAlpha(100),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(5.0),
+                                      bottomRight: Radius.circular(5.0))),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.yellow,
+                                    size: 18.0,
+                                  ),
+                                  Text(
+                                    "${storeItems[index].itemRating}",
+                                    style: TextStyle(color: Colors.orange),
+                                  )
+                                ],
+                              ),
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.favorite_border),
+                              color: Colors.black.withAlpha(100),
+                              onPressed: (){
+
+                              },
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
         ),
       ),
       floatingActionButton: Stack(
@@ -125,10 +222,11 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text("Order Notifications"),
               onTap: () {
-                Navigator.of(context).push(
-                    CupertinoPageRoute(builder: (BuildContext context) {
-                      return OrderNotifications();
-                    }));
+                Navigator
+                    .of(context)
+                    .push(CupertinoPageRoute(builder: (BuildContext context) {
+                  return OrderNotifications();
+                }));
               },
             ),
             ListTile(
@@ -139,8 +237,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               title: Text("Order History"),
-              onTap: (){
-                Navigator.of(context).push(CupertinoPageRoute(builder: (BuildContext context) {
+              onTap: () {
+                Navigator
+                    .of(context)
+                    .push(CupertinoPageRoute(builder: (BuildContext context) {
                   return OrderHistory();
                 }));
               },
@@ -154,8 +254,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               title: Text("Profile Settings"),
-              onTap: (){
-                Navigator.of(context).push(CupertinoPageRoute(builder: (BuildContext context) {
+              onTap: () {
+                Navigator
+                    .of(context)
+                    .push(CupertinoPageRoute(builder: (BuildContext context) {
                   return ProfileSettings();
                 }));
               },
@@ -168,8 +270,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               title: Text("Delivery Address"),
-              onTap: (){
-                Navigator.of(context).push(CupertinoPageRoute(builder: (BuildContext context) {
+              onTap: () {
+                Navigator
+                    .of(context)
+                    .push(CupertinoPageRoute(builder: (BuildContext context) {
                   return DeliveryAddress();
                 }));
               },
@@ -183,8 +287,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               title: Text("About Us"),
-              onTap: (){
-                Navigator.of(context).push(CupertinoPageRoute(builder: (BuildContext context) {
+              onTap: () {
+                Navigator
+                    .of(context)
+                    .push(CupertinoPageRoute(builder: (BuildContext context) {
                   return AboutUs();
                 }));
               },
@@ -197,8 +303,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               title: Text("Login"),
-              onTap: (){
-                Navigator.of(context).push(CupertinoPageRoute(builder: (BuildContext context) {
+              onTap: () {
+                Navigator
+                    .of(context)
+                    .push(CupertinoPageRoute(builder: (BuildContext context) {
                   return LoginLogout();
                 }));
               },
